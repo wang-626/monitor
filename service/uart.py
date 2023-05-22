@@ -1,7 +1,7 @@
 '''Uart service'''
 
 
-def test_connection(port):
+def test_connection(port, data: str) -> bool:
     '''
     A uart sends data to B uart.
 
@@ -9,6 +9,6 @@ def test_connection(port):
 
     return bool
     '''
-    port.send('true')
+    port.send(data)
     response = port.recive(4)
-    return response == b'true'
+    return response == bytes(data, 'utf-8')

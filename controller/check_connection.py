@@ -6,7 +6,7 @@ from datetime import datetime
 
 def machine_connection(port):
     '''start check connection'''
-    uart_connect_result = test_connection(port)
+    uart_connect_result = test_connection(port, 'true')
     if uart_connect_result:
         connect = 1  # 1 is connection
     else:

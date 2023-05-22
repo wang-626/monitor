@@ -10,7 +10,7 @@ class TestUartConnection(unittest.TestCase):
 
     def test_uart_connectionr(self):
         '''uart connectionr'''
-        mock_uart = Mock(spec=Uart)
+        mock_uart = Mock(spec=Uart) # 模擬的uart
         mock_uart.recive.return_value = b'true'  # uart有成功連線
         uart_connect_result, db_insert_result = machine_connection(mock_uart)
         self.assertEqual(uart_connect_result, True)
@@ -18,7 +18,7 @@ class TestUartConnection(unittest.TestCase):
 
     def test_uart_disconnected(self):
         '''uart disconnected'''
-        mock_uart = Mock(spec=Uart)
+        mock_uart = Mock(spec=Uart) # 模擬的uart
         mock_uart.recive.return_value = b''  # uart沒有成功連線
         uart_connect_result, db_insert_result = machine_connection(mock_uart)
         self.assertNotEqual(uart_connect_result, True)

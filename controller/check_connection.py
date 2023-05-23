@@ -1,10 +1,9 @@
 '''check connection and logging sql'''
-from service.uart import test_connection
-from repoitory.sql import Database
 from datetime import datetime
+from service.uart import test_connection
 
 
-def machine_connection(port):
+def machine_connection(port, db):
     '''start check connection'''
     uart_connect_result = test_connection(port, 'true')
     if uart_connect_result:
@@ -16,7 +15,6 @@ def machine_connection(port):
         'connect':  connect,
         'log_time': datetime.now(),
     }
-    db = Database()
     db.connect()
     db.insert_data(table, data)
     db_insert_result = db.commit_changes()

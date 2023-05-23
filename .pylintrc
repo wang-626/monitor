@@ -1,2 +1,6 @@
 [FORMAT]
 good-names=db
+
+[MESSAGES CONTROL]
+disable=E0401
+

@@ -6,8 +6,9 @@ config = dotenv_values(".env")
 
 
 class Database:
+    '''Initialize database '''
+
     def __init__(self):
-        '''Initialize database data '''
         self.db = {
             "host": config['db_host'],
             "port": 3306,

@@ -1,11 +1,12 @@
-'''Uart entity control'''
+'''Control uart entity'''
 
 import serial
 
 
 class Uart:
+    '''connection port and set timeout'''
+
     def __init__(self, port, timeout: int = 1):
-        '''connection port'''
         self.port = port
         self.uart = None
         try:

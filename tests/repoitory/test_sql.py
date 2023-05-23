@@ -22,7 +22,7 @@ class TestSql(unittest.TestCase):
         query = f"SELECT * FROM {table} ORDER BY log_time desc"
         results = db.execute_query_one(query)
         self.assertEqual(
-            results[1].strftime("%Y-%m-%d %H:%M:%S"),
+            results[2].strftime("%Y-%m-%d %H:%M:%S"),
             tmp_time)  # sql最後一筆資料跟寫入資料是否相同
 
 

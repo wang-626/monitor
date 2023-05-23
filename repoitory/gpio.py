@@ -9,8 +9,9 @@ from wiringpi import GPIO
 
 
 class Gpio():
+    '''Initialize gpio connection pin'''
+
     def __init__(self, pin: int) -> None:
-        '''Initialize gpio '''
         wiringpi.wiringPiSetup()
         self.pin = pin
         self.mode = 'None'
@@ -22,7 +23,7 @@ class Gpio():
         self.mode = 'OUT'
 
     def set_input(self) -> None:
-        '''set gpio mode input'''
+        '''set gpio mode off'''
         wiringpi.pinMode(self.pin, GPIO.IN)
         self.mode = 'IN'
 

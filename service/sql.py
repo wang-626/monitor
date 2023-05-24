@@ -7,8 +7,8 @@ from datetime import datetime
 def get_gpio_status(db) -> bool:
     '''get gpio table value'''
     db.connect()
-    query = 'SELECT * FROM gpio ORDER BY id DESC'
-    return db.execute_query_one(query)
+    query = 'SELECT status FROM gpio ORDER BY id DESC'
+    return db.execute_query_one(query)[0]
 
 
 def set_gpio_status(db, status: int):

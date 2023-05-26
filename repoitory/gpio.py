@@ -23,14 +23,14 @@ class Gpio():
         self.mode = 'OUT'
 
     def set_input(self) -> None:
-        '''set gpio mode off'''
+        '''set gpio mode input'''
         wiringpi.pinMode(self.pin, GPIO.IN)
         self.mode = 'IN'
 
     def set_high(self) -> None:
-        '''set gpio output value'''
+        '''set gpio output high'''
         wiringpi.digitalWrite(self.pin, 1)
 
     def set_low(self) -> None:
-        '''set gpio output value'''
+        '''set gpio output low'''
         wiringpi.digitalWrite(self.pin, 0)

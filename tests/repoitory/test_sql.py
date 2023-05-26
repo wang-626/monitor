@@ -2,6 +2,17 @@
 import unittest
 from datetime import datetime
 from repoitory.sql import Database
+from dotenv import dotenv_values
+
+config = dotenv_values(".env")
+
+remote_db = {
+    "host": config['db_host'],
+    "port": 3306,
+    "user": config['db_user'],
+    "password": config['db_password'],
+    "database": config['db_name']
+}
 
 
 class TestSql(unittest.TestCase):
@@ -9,7 +20,7 @@ class TestSql(unittest.TestCase):
 
     def test_sql_insert_query(self):
         '''Test sql insert and query'''
-        db = Database()
+        db = Database(remote_db)
         db.connect()
         table = "test1"
         tmp_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

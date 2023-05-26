@@ -8,22 +8,22 @@ from repoitory.gpio import Gpio
 from service.check_network import check_network
 from dotenv import dotenv_values
 
-config = dotenv_values(".env")
+config = dotenv_values('.env')
 
 
 remote_db = {
-    "host": config['db_host'],
-    "port": 3306,
-    "user": config['db_user'],
-    "password": config['db_password'],
-    "database": config['db_name']
+    'host': config['db_host'],
+    'port': 3306,
+    'user': config['db_user'],
+    'password': config['db_password'],
+    'database': config['db_name']
 }
 
 
 def main():
     signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-    PORT = "/dev/ttyS5"
+    PORT = '/dev/ttyS5'
     db = Database(remote_db)
     db2 = Database(remote_db)
     uart = Uart(PORT)
@@ -39,5 +39,5 @@ def main():
     task.start()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

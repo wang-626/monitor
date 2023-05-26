@@ -10,7 +10,7 @@ def machine_connection(port, db):
         connect = 1  # 1 is connection
     else:
         connect = 0  # 0 is not connection
-    table = 'test1'
+    table = 'orangepi_connect'
     data = {
         'connect':  connect,
         'log_time': datetime.now(),

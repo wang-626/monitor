@@ -1,6 +1,5 @@
 '''Sql service'''
 
-from repoitory.sql import Database
 from datetime import datetime
 
 

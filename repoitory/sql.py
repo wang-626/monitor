@@ -1,21 +1,12 @@
 '''Sql entity control'''
 import pymysql
-from dotenv import dotenv_values
-
-config = dotenv_values(".env")
 
 
 class Database:
     '''Initialize database '''
 
-    def __init__(self):
-        self.db = {
-            "host": config['db_host'],
-            "port": 3306,
-            "user": config['db_user'],
-            "password": config['db_password'],
-            "database": config['db_name']
-        }
+    def __init__(self, db_set):
+        self.db = db_set
         self.conn = None
         self.cursor = None
 

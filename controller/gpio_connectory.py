@@ -24,5 +24,9 @@ class GpioConnector():
     def check_db_gpio_set(self):
         '''check db gpio set'''
         db_gpio_set = get_gpio_status(self.db)
+        print('check db gpio set')
         if db_gpio_set != self.gpio_val:
+            print(f'db gpio set changed {self.gpio_val} -> {db_gpio_set}')
             self.set_gpio_val(db_gpio_set)
+        else:
+            print('db gpio set unchanged')

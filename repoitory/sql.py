@@ -1,5 +1,6 @@
 '''Sql entity control'''
 import pymysql
+import sqlite3
 
 
 class Database:
@@ -12,8 +13,11 @@ class Database:
 
     def connect(self):
         '''database connect '''
-        self.conn = pymysql.connect(**self.db)
-        self.cursor = self.conn.cursor()
+        pass
+
+    def sql(self, sql_string):
+        '''use raw sql '''
+        self.cursor.execute(sql_string)
 
     def disconnect(self):
         '''database disconnect '''
@@ -22,24 +26,24 @@ class Database:
         if self.conn:
             self.conn.close()
 
-    def execute_query_all(self, query):
+    def query_all(self, query):
         '''returns all the rows or None of a query result'''
         try:
             self.cursor.execute(query)
             results = self.cursor.fetchall()
             return results
         except Exception as error:
-            print("Error executing query:", error)
+            print('Error executing query:', error)
             return error
 
-    def execute_query_one(self, query):
+    def query_one(self, query):
         '''returns a single record or None'''
         try:
             self.cursor.execute(query)
             result = self.cursor.fetchone()
             return result
         except Exception as error:
-            print("Error executing query:", error)
+            print('Error executing query:', error)
             return error
 
     def commit_changes(self):
@@ -48,7 +52,7 @@ class Database:
             self.conn.commit()
             return True
         except Exception as error:
-            print("Error committing changes:", error)
+            print('Error committing changes:', error)
             self.conn.rollback()
             return error
 
@@ -59,17 +63,37 @@ class Database:
         example:
 
         {
-          "column1":123,
+          'column1':123,
 
-          "column2":456,
+          'column2':456,
         }
         '''
         columns = ', '.join(data.keys())
-        values = ', '.join([f"'{value}'" for value in data.values()])
-        data = f"INSERT INTO {table} ({columns}) VALUES ({values})"
+        values = ', '.join([f'"{value}"' for value in data.values()])
+        data = f'INSERT INTO {table} ({columns}) VALUES ({values})'
         self.cursor.execute(data)
 
     def __del__(self):
         '''close sql if sql not close'''
         if self.conn:
             self.disconnect()
+
+
+class MysqlDb(Database):
+
+    def connect(self):
+        '''database connect '''
+        self.conn = pymysql.connect(**self.db)
+        self.cursor = self.conn.cursor()
+
+
+class SqliteDb(Database):
+
+    def __init__(self, dbname):
+        self.dbname = dbname
+        self.conn = None
+        self.cursor = None
+
+    def connect(self):
+        self.conn = sqlite3.connect(f'{self.dbname}')
+        self.cursor = self.conn.cursor()
